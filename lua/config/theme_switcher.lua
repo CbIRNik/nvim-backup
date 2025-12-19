@@ -1,7 +1,7 @@
 local config_dir = vim.fn.stdpath("config")
 local state_file = config_dir .. "/lua/config/theme_state.lua"
 
-local themes = {
+local available_themes = {
     "catppuccin",
     "nordic",
 }
@@ -24,33 +24,29 @@ local function load_saved_theme()
     return ok and theme or "catppuccin"
 end
 
--- Функция для смены темы с сохранением
-local function set_theme(theme_name)
+-- Функция для применения и сохранения темы
+local function apply_theme(theme_name)
     vim.cmd("colorscheme " .. theme_name)
     save_theme(theme_name)
-    vim.notify("Theme: " .. theme_name, vim.log.levels.INFO, {
+
+    -- Перезагружаем lualine для подстройки под новую тему
+    require("lualine").refresh()
+
+    vim.notify("Theme saved: " .. theme_name, vim.log.levels.INFO, {
         title = "Theme Switcher",
     })
 end
 
--- Функция для открытия picker с темами
-local function theme_picker()
-    local themes_list = {}
-    for _, theme in ipairs(themes) do
-        table.insert(themes_list, {
-            text = theme,
-            value = theme,
-        })
-    end
-
-    vim.ui.select(themes, {
+-- Функция для открытия picker с выбором темы
+local function pick_theme()
+    vim.ui.select(available_themes, {
         prompt = "Select theme: ",
         format_item = function(item)
             return "  " .. item
         end,
     }, function(choice)
         if choice then
-            set_theme(choice)
+            apply_theme(choice)
         end
     end)
 end
@@ -59,15 +55,14 @@ end
 local saved_theme = load_saved_theme()
 vim.cmd("colorscheme " .. saved_theme)
 
--- Клавиатурные маппинги
-vim.keymap.set("n", "<leader>uth", theme_picker, {
+-- Маппинг для открытия picker тем
+vim.keymap.set("n", "<leader>uth", pick_theme, {
     noremap = true,
     silent = true,
-    desc = "Select theme",
+    desc = "Choose colorscheme",
 })
 
 -- Экспортируем функции
+_G.pick_theme = pick_theme
+_G.apply_theme = apply_theme
 _G.save_theme = save_theme
-_G.load_saved_theme = load_saved_theme
-_G.set_theme = set_theme
-_G.theme_picker = theme_picker

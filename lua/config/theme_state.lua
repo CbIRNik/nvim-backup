@@ -1,1 +1,1 @@
-return 'nordic'
+return 'catppuccin'

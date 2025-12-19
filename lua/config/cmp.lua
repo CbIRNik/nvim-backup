@@ -10,12 +10,10 @@ cmp.setup({
         completion = {
             border = "rounded",
             winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder",
-            scrollbar = true,
         },
         documentation = {
             border = "rounded",
             winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder",
-            scrollbar = true,
         },
     },
     mapping = cmp.mapping.preset.insert({

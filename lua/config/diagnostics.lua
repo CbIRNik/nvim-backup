@@ -1,18 +1,13 @@
-local signs = {
-    Error = "󰅚 ",
-    Warn = "󰀪 ",
-    Hint = "󰌶 ",
-    Info = "󰋽 ",
-}
-
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 vim.diagnostic.config({
     virtual_text = false,
-    signs = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.HINT] = "󰌶 ",
+            [vim.diagnostic.severity.INFO] = "󰋽 ",
+        },
+    },
     underline = true,
     update_in_insert = false,
     severity_sort = true,
@@ -37,7 +32,8 @@ local function close_diag_window()
     end
 end
 
-local function open_diagnostic_float()
+-- Функция открытия диагностики
+local function open_diagnostics()
     -- Если окно уже открыто - закрываем его
     if diag_win and vim.api.nvim_win_is_valid(diag_win) then
         close_diag_window()
@@ -51,7 +47,7 @@ local function open_diagnostic_float()
         max_width = 80,
     })
 
-    if win then
+    if win and buf then
         diag_win = win
         diag_buf = buf
 
@@ -63,29 +59,15 @@ local function open_diagnostic_float()
                 close_diag_window()
             end,
         })
+
+        -- Переводим фокус на окно диагностики
+        vim.api.nvim_set_current_win(win)
     end
 end
 
-vim.keymap.set("n", "<space>cd", open_diagnostic_float, {
+-- Маппинг для открытия/закрытия диагностики
+vim.keymap.set("n", "<space>cd", open_diagnostics, {
     noremap = true,
     silent = true,
     desc = "Show line diagnostics",
-})
-
--- Автоматически подстраиваем цвета диагностики под тему
-local function setup_diagnostic_highlights()
-    -- Используем встроенные группы которые подстраиваются под тему
-    vim.api.nvim_set_hl(0, "DiagnosticSignError", { link = "DiagnosticError" })
-    vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { link = "DiagnosticWarn" })
-    vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { link = "DiagnosticInfo" })
-    vim.api.nvim_set_hl(0, "DiagnosticSignHint", { link = "DiagnosticHint" })
-end
-
--- Вызываем при загрузке
-setup_diagnostic_highlights()
-
--- Пересчитываем при смене темы
-vim.api.nvim_create_autocmd("ColorScheme", {
-    group = vim.api.nvim_create_augroup("DiagnosticHighlights", { clear = true }),
-    callback = setup_diagnostic_highlights,
 })
