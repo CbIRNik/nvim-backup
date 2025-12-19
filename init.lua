@@ -1,4 +1,6 @@
 require("config.mappings")
 require("config.lazy")
 require("config.config")
+require("config.diagnostics")
+require("config.theme_switcher")
 require("config.cmp")
