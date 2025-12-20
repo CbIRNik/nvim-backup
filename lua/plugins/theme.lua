@@ -31,10 +31,4 @@ return {
         priority = 1000,
         opts = {},
     },
-    {
-        "neanias/everforest-nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {}
-    }
 }
