@@ -12,15 +12,16 @@ return {
         sections = {
             lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
             lualine_b = {
-                { "branch", icon = "" },
+                { "branch", icon = "" },
                 {
                     "diff",
-                    symbols = { added = " ", modified = " ", removed = " " },
+                    symbols = { added = " ", modified = " ", removed = " " },
+                    colored = true,
                 },
                 {
                     "diagnostics",
                     sources = { "nvim_lsp" },
-                    symbols = { error = " ", warn = " ", info = " " },
+                    symbols = { error = " ", warn = " ", info = " " },
                 }
             },
             lualine_c = {

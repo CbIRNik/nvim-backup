@@ -19,8 +19,13 @@ local function setup_highlights()
     vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
     vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
 
-    -- Ноisification границы
+    -- Notification границы
     vim.api.nvim_set_hl(0, "NotificationBorder", { link = "FloatBorder" })
+
+    -- Git signs colors - green for added, yellow for changed, red for deleted
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#90ee90" })
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffd700" })
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff6b6b" })
 end
 
 -- Устанавливаем highlights при загрузке
