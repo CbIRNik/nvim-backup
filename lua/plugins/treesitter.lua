@@ -17,7 +17,6 @@ return {
             "yaml",
             "html",
             "css",
-            "python",
             "toml",
             "markdown",
         },
