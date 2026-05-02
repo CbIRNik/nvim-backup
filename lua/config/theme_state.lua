@@ -1,1 +1,1 @@
-return 'catppuccin-mocha'
+return 'kanagawa-paper-ink'
