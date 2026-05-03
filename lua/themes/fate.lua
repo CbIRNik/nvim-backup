@@ -735,7 +735,7 @@ local function integrations(p)
 
     CratesNvimSearching = { fg = p.blue, bg = p.info_bg },
     CratesNvimLoading = { fg = p.blue, bg = p.info_bg },
-    CratesNvimVersion = { fg = p.yellow, bg = p.warning_bg },
+    CratesNvimVersion = { fg = p.yellow, bg = "NONE" },
     CratesNvimPreRelease = { fg = p.yellow, bg = p.warning_bg },
     CratesNvimYanked = { fg = p.red, bg = p.error_bg },
     CratesNvimNoMatch = { fg = p.red, bg = p.error_bg },

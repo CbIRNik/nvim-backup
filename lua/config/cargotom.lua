@@ -95,7 +95,13 @@ function M.server_config(capabilities, on_attach)
       end
     end,
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      client.server_capabilities.completionProvider = nil
+
+      if on_attach then
+        on_attach(client, bufnr)
+      end
+    end,
     init_options = {
       per_page = 25,
       feature_display_mode = "UnusedOpt",

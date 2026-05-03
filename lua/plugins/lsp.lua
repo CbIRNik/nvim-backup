@@ -77,7 +77,7 @@ return {
                             vim.tbl_extend("force", opts, { desc = "Crates: open crates.io" }))
                     end,
                     actions = true,
-                    completion = not has_cargo_tom,
+                    completion = true,
                     hover = not has_cargo_tom,
                 },
             })
