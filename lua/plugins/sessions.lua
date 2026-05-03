@@ -5,7 +5,6 @@ return {
         suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
         auto_save_enabled = true,
         auto_restore_enabled = true,
-        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
         session_lens = {
             buftypes_to_ignore = {},
             previewer = false,

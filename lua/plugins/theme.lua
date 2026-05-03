@@ -20,12 +20,6 @@ return {
         },
     },
     {
-        "LazyVim/LazyVim",
-        opts = {
-            colorscheme = "catppuccin",
-        },
-    },
-    {
         "thesimonho/kanagawa-paper.nvim",
         lazy = false,
         priority = 1000,

@@ -1,7 +1,11 @@
 local function setup_highlights()
+    local is_fate = (vim.g.colors_name or ""):match("^fate%-astolfo") ~= nil
+
     -- Float окна (диагностика, cmp, и т.д.)
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
-    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+    if not is_fate then
+        vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
+        vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+    end
 
     -- CMP окна
     vim.api.nvim_set_hl(0, "CmpBorder", { link = "FloatBorder" })
@@ -14,18 +18,22 @@ local function setup_highlights()
     vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { link = "DiagnosticInfo" })
     vim.api.nvim_set_hl(0, "DiagnosticSignHint", { link = "DiagnosticHint" })
     vim.api.nvim_set_hl(0, "DiagnosticFloatBorder", { link = "FloatBorder" })
-    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { link = "DiagnosticError" })
-    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
-    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
-    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
+    if not is_fate then
+        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { link = "DiagnosticError" })
+        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
+        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
+        vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
+    end
 
     -- Notification границы
     vim.api.nvim_set_hl(0, "NotificationBorder", { link = "FloatBorder" })
 
     -- Git signs colors - green for added, yellow for changed, red for deleted
-    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#90ee90" })
-    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffd700" })
-    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff6b6b" })
+    if not is_fate then
+        vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#90ee90" })
+        vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffd700" })
+        vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff6b6b" })
+    end
 end
 
 -- Устанавливаем highlights при загрузке

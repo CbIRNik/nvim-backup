@@ -200,31 +200,15 @@ Runtime LSP/default маппинги, которые активны в Neovim:
 | `<leader>cR` | `n` | Open crate repository |
 | `<leader>cC` | `n` | Open crate on crates.io |
 
-### Copilot Chat и autocomplete
+### AI autocomplete
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `<leader>cc` | `n` | Toggle Chat |
-| `<leader>cm` | `n` | Select Model |
-| `<leader>cn` | `n` | New Chat |
-| `<leader>cr` | `n` | Reset Chat |
-| `<leader>cs` | `n` | Save Chat |
-| `<leader>chl` | `n` | Load History |
-| `<leader>chd` | `n` | Delete History |
 | `<leader>pa` | `n` | Pick autocomplete provider |
-| `<C-g>` | `i` | Accept current autocomplete provider suggestion |
-
-Активные insert-mode бинды от `copilot.vim`:
-
-| Key | Mode | Action |
-| --- | --- | --- |
-| `<C-]>` | `i` | Dismiss copilot suggestion |
-| `<M-Bslash>` | `i` | Suggest |
-| `<M-C-Right>` | `i` | Accept line |
-| `<M-Right>` | `i` | Accept word |
-| `<M-[>` | `i` | Previous suggestion |
-| `<M-]>` | `i` | Next suggestion |
-| `<Tab>` | `i` | Accept copilot suggestion or insert tab |
+| `:AutocompleteProvider` | `c` | Pick autocomplete provider |
+| `:AutocompleteProvider none` | `c` | Disable AI autocomplete |
+| `:AutocompleteProvider copilot` | `c` | Enable Copilot autocomplete |
+| `<C-g>` | `i` | Accept Copilot suggestion; mapped only when Copilot provider is active |
 
 ### Completion / snippets
 
@@ -357,7 +341,6 @@ Runtime snippet plug-maps:
 
 ## Конфликты и перекрытия
 
-- `<leader>cr` конфликтует между `CopilotChatReset` и буферным `LSP Rename`. В LSP-буфере сработает буферный `rename`.
 - `<leader>cf` конфликтует между `LSP Format` и `crates.nvim features`. В `Cargo.toml` сработает `crates`, в обычном LSP-буфере форматирование.
 - `K` конфликтует между `LSP Hover` и `crates.nvim`. В `Cargo.toml` сработает popup с версиями crate.
-- `<Tab>` в insert mode участвует сразу в `copilot.vim`, `nvim-cmp` и `vsnip`; фактическое поведение зависит от активного состояния completion/copilot/snippet.
+- `<Tab>` в insert mode участвует в `nvim-cmp` и `vsnip`; Copilot его больше не перехватывает.

@@ -7,6 +7,7 @@ return {
     },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local cargotom = require("config.cargotom")
 
       local function map(bufnr, mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, {
@@ -100,6 +101,8 @@ return {
         vim.lsp.config(server_name, server_config)
         vim.lsp.enable(server_name)
       end
+
+      cargotom.configure_lsp(capabilities, on_attach)
     end,
   },
 }

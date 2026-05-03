@@ -4,7 +4,6 @@ return {
     formatters_by_ft = {
       go = { "goimports", "gofumpt", "gofmt" },
       rust = { "rustfmt" },
-      ["*"] = { "codespell" },
     },
     default_format_opts = {
       lsp_format = "fallback",
@@ -12,9 +11,6 @@ return {
     format_on_save = {
       lsp_format = "fallback",
       timeout_ms = 500,
-    },
-    format_after_save = {
-      lsp_format = "fallback",
     },
   },
 }

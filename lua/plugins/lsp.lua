@@ -18,12 +18,29 @@ return {
     },
     {
         "saecki/crates.nvim",
-        event = { "BufRead Cargo.toml", "BufNew Cargo.toml" },
+        event = { "BufReadPost Cargo.toml", "BufNewFile Cargo.toml" },
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             local crates = require("crates")
+            local has_cargo_tom = false
+            local ok, cargotom = pcall(require, "config.cargotom")
+            if ok then
+                has_cargo_tom = cargotom.is_available()
+            end
 
             crates.setup({
+                search_indicator = true,
+                completion = {
+                    insert_closing_quote = true,
+                    crates = {
+                        enabled = not has_cargo_tom,
+                        min_chars = 2,
+                        max_results = 20,
+                    },
+                },
+                popup = {
+                    border = "rounded",
+                },
                 lsp = {
                     enabled = true,
                     on_attach = function(client, bufnr)
@@ -60,8 +77,8 @@ return {
                             vim.tbl_extend("force", opts, { desc = "Crates: open crates.io" }))
                     end,
                     actions = true,
-                    completion = true,
-                    hover = true,
+                    completion = not has_cargo_tom,
+                    hover = not has_cargo_tom,
                 },
             })
         end,

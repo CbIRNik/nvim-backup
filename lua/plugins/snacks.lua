@@ -21,8 +21,19 @@ return {
         words = { enabled = true },
         styles = {
             notification = {
-                -- wo = { wrap = true } -- Wrap notifications
-            }
+                border = true,
+                wo = {
+                    winblend = 0,
+                    wrap = false,
+                },
+            },
+            notification_history = {
+                border = true,
+                wo = {
+                    winblend = 0,
+                    winhighlight = "Normal:SnacksNotifierHistory,FloatBorder:FloatBorder",
+                },
+            },
         },
     },
     keys = {
