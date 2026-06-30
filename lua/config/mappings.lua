@@ -16,3 +16,11 @@ map("t", "<C-l>", "<C-\\><C-n><C-w>l", vim.tbl_extend("force", opts, { desc = "F
 
 map("n", "<S-h>", "<cmd>bprevious<CR>", vim.tbl_extend("force", opts, { desc = "Previous buffer" }))
 map("n", "<S-l>", "<cmd>bnext<CR>", vim.tbl_extend("force", opts, { desc = "Next buffer" }))
+
+-- Move text left/right
+map('v', 'H', '<gv')
+map('v', 'L', '>gv')
+
+-- Move text up/down (automatically handles line numbering)
+map('v', 'J', ":m '>+1<CR>gv=gv", { silent = true })
+map('v', 'K', ":m '<-2<CR>gv=gv", { silent = true })
