@@ -1,1 +1,1 @@
-return 'fate-astolfo-night'
+return 'kanagawa-paper-ink'

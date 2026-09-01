@@ -388,6 +388,36 @@ local function lualine(p)
   }
 end
 
+local function lualine_theme(p)
+  local active = { fg = p.base, bg = p.red, gui = "bold" }
+  local side = { fg = p.red, bg = p.surface0 }
+  local mid = { fg = p.text, bg = p.mantle }
+  local inactive = { fg = p.overlay1, bg = p.mantle }
+  local inactive_mid = { fg = p.overlay1, bg = p.base }
+
+  local function mode()
+    return {
+      a = vim.deepcopy(active),
+      b = vim.deepcopy(side),
+      c = vim.deepcopy(mid),
+    }
+  end
+
+  return {
+    normal = mode(),
+    insert = mode(),
+    visual = mode(),
+    replace = mode(),
+    command = mode(),
+    terminal = mode(),
+    inactive = {
+      a = inactive,
+      b = inactive_mid,
+      c = inactive_mid,
+    },
+  }
+end
+
 local function treesitter(p)
   return {
     ["@variable"] = { fg = p.text },
@@ -1018,6 +1048,10 @@ function M.setup(variant)
   for name, value in pairs(terminal(p)) do
     vim.g[name] = value
   end
+end
+
+function M.lualine_theme(variant)
+  return lualine_theme(palettes[variant] or palettes.night)
 end
 
 return M
