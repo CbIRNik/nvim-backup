@@ -123,6 +123,15 @@
 | `[[` | `n`, `t` | Prev Reference |
 | `]]` | `n`, `t` | Next Reference |
 
+### Markdown
+
+Markdown автоматически отображается в оформленном виде в normal mode и возвращается к исходной разметке при редактировании.
+
+| Key | Mode | Action |
+| --- | --- | --- |
+| `<leader>mp` | `n` | Open rendered Markdown preview to the side |
+| `<leader>um` | `n` | Toggle inline Markdown rendering for current buffer |
+
 ### Toggle-ы
 
 | Key | Mode | Action |
@@ -238,10 +247,12 @@ Runtime snippet plug-maps:
 
 | Key | Mode | Action |
 | --- | --- | --- |
-| `gnn` | `n` | Init incremental selection |
-| `grn` | `n` | Increment node selection |
-| `grc` | `n` | Increment scope selection |
-| `grm` | `n` | Decrement node selection |
+| `an` | `v` | Select parent syntax node |
+| `in` | `v` | Select previous/first child syntax node |
+| `]n` | `v` | Select next syntax node |
+| `[n` | `v` | Select previous syntax node |
+| `]N` | `v` | Extend selection to next syntax node |
+| `[N` | `v` | Extend selection to previous syntax node |
 
 ## Активные built-in / plugin default маппинги, которые тоже есть в runtime
 

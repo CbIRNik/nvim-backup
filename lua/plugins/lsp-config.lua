@@ -88,6 +88,23 @@ return {
             },
           },
         },
+        lua_ls = {
+          settings = {
+            Lua = {
+              diagnostics = {
+                globals = { "vim" },
+              },
+              workspace = {
+                checkThirdParty = false,
+              },
+            },
+          },
+        },
+        yamlls = {
+          -- Helm values are handled by helm_ls, which provides their schema.
+          filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+        },
+        helm_ls = {},
       }
 
       for server_name, server_config in pairs(servers) do

@@ -1,12 +1,26 @@
 return {
     {
+        "qvalentin/helm-ls.nvim",
+        ft = "helm",
+        opts = {
+            conceal_templates = { enabled = false },
+            indent_hints = { enabled = false },
+            action_highlight = { enabled = true },
+        },
+    },
+    {
         "mason-org/mason-lspconfig.nvim",
         opts = {
             ensure_installed = {
                 "rust_analyzer",
                 "vtsls",
                 "gopls",
+                "lua_ls",
+                "yamlls",
+                "helm_ls",
             },
+            -- LSP activation is kept explicit in plugins/lsp-config.lua.
+            automatic_enable = false,
         },
         dependencies = {
             {

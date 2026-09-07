@@ -1,49 +1,36 @@
+local parsers = require("config.treesitter").parsers
+
+local parser_set = {}
+for _, lang in ipairs(parsers) do
+  parser_set[lang] = true
+end
+
 return {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    priority = 100,
-    build = ":TSUpdate",
-    opts = {
-        ensure_installed = {
-            "rust",
-            "go",
-            "javascript",
-            "typescript",
-            "tsx",
-            "lua",
-            "vue",
-            "bash",
-            "json",
-            "yaml",
-            "html",
-            "css",
-            "toml",
-            "markdown",
-        },
-        sync_install = false,
-        auto_install = true,
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false,
-            disable = function(lang, buf)
-                local max_filesize = 100 * 1024
-                local ok, stats = pcall((vim.uv or vim.loop).fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then
-                    return true
-                end
-            end,
-        },
-        indent = {
-            enable = true,
-        },
-        incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = "gnn",
-                node_incremental = "grn",
-                scope_incremental = "grc",
-                node_decremental = "grm",
-            },
-        },
-    },
+  "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  lazy = false,
+  priority = 100,
+  build = ":TSUpdate",
+  config = function()
+    local treesitter = require("nvim-treesitter")
+
+    treesitter.setup()
+
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("TreesitterHighlight", { clear = true }),
+      callback = function(event)
+        local file = vim.api.nvim_buf_get_name(event.buf)
+        local stats = file ~= "" and (vim.uv or vim.loop).fs_stat(file) or nil
+        if stats and stats.size > 100 * 1024 then
+          return
+        end
+
+        local filetype = vim.bo[event.buf].filetype
+        local lang = vim.treesitter.language.get_lang(filetype) or filetype
+        if parser_set[lang] then
+          pcall(vim.treesitter.start, event.buf, lang)
+        end
+      end,
+    })
+  end,
 }

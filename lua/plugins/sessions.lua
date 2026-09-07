@@ -1,5 +1,8 @@
 return {
     "rmagatti/auto-session",
+    cond = function()
+        return #vim.api.nvim_list_uis() > 0
+    end,
     lazy = false,
     opts = {
         suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
