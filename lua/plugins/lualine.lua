@@ -12,35 +12,15 @@ return {
     sections = {
       lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
       lualine_b = {
-        { "branch", icon = "" },
-        {
-          "diff",
-          symbols = { added = " ", modified = " ", removed = " " },
-          colored = true,
-        },
-        {
-          "diagnostics",
-          sources = { "nvim_lsp" },
-          symbols = { error = " ", warn = " ", info = " " },
-        }
+        { "branch", icon = " \u{f126}" },
       },
       lualine_c = {
         "%=",
         { "filename", path = 1, shorting_target = 40 }
       },
-      lualine_x = {
-        {
-          -- Autocomplete provider with icon
-          function()
-            local current = vim.g.autocomplete_provider or ""
-            return "⚡" .. current .. " "
-          end,
-          colored = true,
-          padding = { left = 1, right = 1 },
-        },
-      },
+      lualine_x = {},
       lualine_y = {
-        { "filetype", icon_only = true, separator = { right = "" } },
+        { "filetype", icon_only = false },
         { "progress" }
       },
       lualine_z = {

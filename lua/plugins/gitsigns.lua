@@ -30,13 +30,13 @@ return {
 
             map("n", "]c", function()
                 if vim.wo.diff then return "]c" end
-                vim.schedule(function() gitsigns.next_hunk() end)
+                vim.schedule(function() gitsigns.nav_hunk("next") end)
                 return "<Ignore>"
             end, { expr = true })
 
             map("n", "[c", function()
                 if vim.wo.diff then return "[c" end
-                vim.schedule(function() gitsigns.prev_hunk() end)
+                vim.schedule(function() gitsigns.nav_hunk("prev") end)
                 return "<Ignore>"
             end, { expr = true })
 
@@ -47,6 +47,8 @@ return {
             map("n", "<leader>hS", gitsigns.stage_buffer)
             map("n", "<leader>hR", gitsigns.reset_buffer)
             map("n", "<leader>hp", gitsigns.preview_hunk)
+            map("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "Preview Git hunk inline" })
+            map("n", "<leader>uG", gitsigns.toggle_word_diff, { desc = "Toggle Git word diff" })
             map("n", "<leader>hb", function() gitsigns.blame_line({ full = true }) end)
             map("n", "<leader>hd", gitsigns.diffthis)
         end,

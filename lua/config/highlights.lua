@@ -28,11 +28,20 @@ local function setup_highlights()
     -- Notification границы
     vim.api.nvim_set_hl(0, "NotificationBorder", { link = "FloatBorder" })
 
-    -- Git signs colors - green for added, yellow for changed, red for deleted
-    if not is_fate then
-        vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#90ee90" })
-        vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffd700" })
-        vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#ff6b6b" })
+    -- Use the theme's GitSigns palette in both the buffer and file explorers.
+    -- Do not override GitSigns with fixed RGB values on non-Fate themes.
+    for name, target in pairs({
+        Added = "GitSignsAdd",
+        Untracked = "GitSignsAdd",
+        Modified = "GitSignsChange",
+        Renamed = "GitSignsChange",
+        Copied = "GitSignsAdd",
+        Deleted = "GitSignsDelete",
+        Unmerged = "DiagnosticError",
+        Ignored = "Comment",
+        Staged = "GitSignsAdd",
+    }) do
+        vim.api.nvim_set_hl(0, "SnacksPickerGitStatus" .. name, { link = target })
     end
 end
 
